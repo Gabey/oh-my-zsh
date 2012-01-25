@@ -11,6 +11,9 @@ then
 fi
 
 #setopt no_beep
+unsetopt beep 
+unsetopt hist_beep 
+unsetopt list_beep 
 setopt auto_cd
 setopt multios
 setopt cdablevarS

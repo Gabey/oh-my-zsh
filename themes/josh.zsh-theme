@@ -38,6 +38,11 @@ function josh_prompt {
 
 setopt prompt_subst
 
+# local time, color coded by last return code
+time_enabled="%(?.%{$fg[red]%}.%{$fg[green]%})%*%{$reset_color%}"
+time_disabled="%{$fg[green]%}%*%{$reset_color%}"
+time=$time_enabled
+
 PROMPT='
-%n@%m $(josh_prompt)
-%(?,%{%F{green}%},%{%F{red}%})⚡%{$reset_color%} '
+%{$fg[yellow]%}%n@%m%{$reset_color%} $(josh_prompt)
+${time} %(?,%{%F{green}%},%{%F{red}%})$%{$reset_color%} '
