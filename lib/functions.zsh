@@ -58,3 +58,4 @@ insert-last-command-output() {
 zle -N insert-last-command-output
 bindkey "^[[1;3A" insert-last-command-output
 bindkey "^[[1;5A" insert-last-command-output
+

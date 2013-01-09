@@ -5,44 +5,13 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$grey%}) %{$fg[yellow]%}✗%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$grey%})"
 
-function josh_prompt {
-  (( spare_width = ${COLUMNS} ))
-  prompt=" "
+local user='%{$fg[yellow]%}%n@%{$fg[yellow]%}%m%{$reset_color%}'
+local pwd='%{$fg[green]%}%~%{$reset_color%}'
+#local rvm='%{$fg[red]%}$(rvm-prompt i v g)%{$reset_color%}'
+local rvm='%{$fg[red]%}$(rvm_prompt_info)%{$reset_color%}'
+local return_code='%(?..%{$fg[red]%}%? ↵%{$reset_color%})'
+local git_branch='$(git_prompt_status)%{$reset_color%}$(git_prompt_info)%{$reset_color%}'
+local sign='%{$fg[blue]%}$%{$reset_color%}'
 
-  branch=$(current_branch)
-  ruby_version=$(rvm_prompt_info)
-  path_size=${#PWD}
-  branch_size=${#branch}
-  ruby_size=${#ruby_version}
-  user_machine_size=${#${(%):-%n@%m-}}
-  
-  if [[ ${#branch} -eq 0 ]]
-    then (( ruby_size = ruby_size + 1 ))
-  else
-    (( branch_size = branch_size + 4 ))
-    if [[ -n $(git status -s 2> /dev/null) ]]; then
-      (( branch_size = branch_size + 2 ))
-    fi
-  fi
-  
-  (( spare_width = ${spare_width} - (${user_machine_size} + ${path_size} + ${branch_size} + ${ruby_size}) ))
-
-  while [ ${#prompt} -lt $spare_width ]; do
-    prompt=" $prompt"
-  done
-  
-  prompt="%{%F{green}%}$PWD$prompt%{%F{red}%}$(rvm_prompt_info)%{$reset_color%} $(git_prompt_info)"
-  
-  echo $prompt
-}
-
-setopt prompt_subst
-
-# local time, color coded by last return code
-time_enabled="%(?.%{$fg[red]%}.%{$fg[green]%})%*%{$reset_color%}"
-time_disabled="%{$fg[green]%}%*%{$reset_color%}"
-time=$time_enabled
-
-PROMPT='
-%{$fg[yellow]%}%n@%m%{$reset_color%} $(josh_prompt)
-${time} %(?,%{%F{green}%},%{%F{red}%})$%{$reset_color%} '
+PROMPT="%{$fg[cyan]%}%*%{$reset_color%} ${user} ${pwd} ${sign} "
+RPROMPT="${git_branch} ${rvm}"
