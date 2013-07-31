@@ -4,6 +4,9 @@ function zsh_man() {
   print ""
   print "working with files in directory"
   print "for file in **/*; do print $file ;done"
+  print ""
+  print "renaming files" 
+  print "for foo in * ; { mv $foo ${foo/erb/haml};}"
 }
 
 function find_any() {

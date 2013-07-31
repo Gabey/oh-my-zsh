@@ -34,3 +34,11 @@ function git_info() {
 
   popd >/dev/null
 }
+
+function git_man(){
+  echo "Update remote branch"
+  echo "git remote show origin"
+  echo "git remote update"
+  echo "git fetch"
+  echo "git checkout -b local-name origin/remote-name"
+}
