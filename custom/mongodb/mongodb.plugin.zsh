@@ -5,9 +5,9 @@ function mongodb_repair() {
   print "2 - sudo start mongodb"  
 }
 
-function mongodb_install{
+function mongodb_install(){
   print "Add 10gen repo and then install through package manager"
   print "go in the console: mongo"
   print "select your db: use db_name"
-  print "add you user : db.addUser('username, 'password'"  
+  print "add you user : db.addUser('username', 'password')"  
 }
