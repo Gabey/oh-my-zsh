@@ -7,6 +7,11 @@ function zsh_man() {
   print ""
   print "renaming files" 
   print "for foo in * ; { mv $foo ${foo/erb/haml};}"
+  print ""
+  print "read files line by line" 
+  print "while read i; do echo $i; done < Gemfile"
+  print "while read i; do ((++counter)); echo $counter $i; done < Gemfile"
+  print "while read i; do ((++counter)); ((a = (counter / 50))); echo $counter $i >> doc/views$a.txt; done < views1.txt"
 }
 
 function find_any() {
